@@ -5,11 +5,13 @@ def main():
     parser = argparse.ArgumentParser(description="Base Tokenizer")
     parser.add_argument("--path", required=True, help="Path to the input file")
     parser.add_argument("--lang", required=True, help="Language code")
+    parser.add_argument("--size", required=False, help="Vocabulary size", default=100, type=int)
 
     args = parser.parse_args()
 
     base_file_path = args.path
     lang_code = args.lang
+    vocab_size = args.size
 
     if lang_code == 'bn':
         language = 'Bengali'
@@ -22,7 +24,7 @@ def main():
 
     base_tokenizer = BaseTokenizer(base_file_path)
 
-    base_vocab_size = 100
+    base_vocab_size = vocab_size
     base_vocab = base_tokenizer.train_tokenizer(base_vocab_size)
 
     print("Base Vocabulary:", base_vocab)
